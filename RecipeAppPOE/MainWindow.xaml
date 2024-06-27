@@ -1,0 +1,55 @@
+﻿<Window x:Class="RecipeAppPOE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Recipe Application" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Add New Recipe" Click="AddNewRecipe_Click"/>
+                <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+                <TextBlock Text="Filter by ingredient or food group"/>
+                <TextBox x:Name="FilterTextBox" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+                <TextBlock Text="Select food group"/>
+                <ComboBox x:Name="FoodGroupComboBox" Width="150" ItemsSource="{Binding FoodGroups}" SelectedItem="{Binding SelectedFoodGroup}" Loaded="FoodGroupComboBox_Loaded" SelectionChanged="FoodGroupComboBox_SelectionChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+                <TextBlock Text="Max calories"/>
+                <TextBox x:Name="MaxCaloriesTextBox" Width="100"/>
+            </StackPanel>
+            <Button Content="Filter" Click="FilterRecipes_Click"/>
+            <Button Content="Reset" Click="ResetFilters_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="RecipeDataGrid" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Recipes}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Ingredients" Binding="{Binding IngredientsDescription}"/>
+                <DataGridTextColumn Header="Steps" Binding="{Binding StepsDescription}"/>
+                <DataGridTextColumn Header="Total Calories" Binding="{Binding TotalCalories}"/>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Scale" Click="ScaleRecipe_Click"/>
+                                <Button Content="Edit" Click="EditRecipe_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

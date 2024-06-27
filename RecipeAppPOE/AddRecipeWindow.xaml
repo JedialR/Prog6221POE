@@ -1,0 +1,41 @@
+﻿<Window x:Class="RecipeAppPOE.AddRecipeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add New Recipe" Height="600" Width="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="Recipe Name:"/>
+            <TextBox x:Name="RecipeNameTextBox"/>
+            <TextBlock Text="Ingredients (add one at a time):"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBox x:Name="IngredientNameTextBox" Width="100" Margin="0,0,10,0" Text="Name"/>
+                <TextBox x:Name="IngredientQuantityTextBox" Width="50" Margin="0,0,10,0" Text="Qty"/>
+                <TextBox x:Name="IngredientUnitTextBox" Width="50" Margin="0,0,10,0" Text="Unit"/>
+                <TextBox x:Name="IngredientCaloriesTextBox" Width="50" Margin="0,0,10,0" Text="Cal"/>
+                <ComboBox x:Name="IngredientFoodGroupComboBox" Width="150" Margin="0,0,10,0"/>
+                <Button Content="Add Ingredient" Click="AddIngredientButton_Click"/>
+            </StackPanel>
+            <DataGrid x:Name="IngredientsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Height="150">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
+                    <DataGridTextColumn Header="Unit" Binding="{Binding Unit}"/>
+                    <DataGridTextColumn Header="Calories" Binding="{Binding Calories}"/>
+                    <DataGridTextColumn Header="Food Group" Binding="{Binding FoodGroup}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Text="Steps (one per line):"/>
+            <TextBox x:Name="StepsTextBox" AcceptsReturn="True" Height="100"/>
+        </StackPanel>
+
+        <Button Content="Add Recipe" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Center" Click="AddRecipeButton_Click"/>
+    </Grid>
+</Window>
+
+
